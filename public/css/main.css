@@ -1,0 +1,60 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+.intro {
+  height: 100%;
+  width: 100%;
+  margin-top: -20px;
+  /*margin: auto;*/
+  background-image: url("../img/bg3.jpg");
+  display: table;
+  top: 0;
+  background-size: cover;
+}
+
+.intro .inner {
+  display: table-cell;
+  width: 100%;
+  /*vertical-align: middle;*/
+  max-width: none;
+}
+
+.intro form {
+  margin-top: 200px;
+  padding: 40px;
+  padding-bottom: 60px;
+  background-color: rgba(0, 0, 0, 0.54);
+  border-radius: 22px;
+
+}
+.intro .btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+.content {
+  max-width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: grey;
+}
+.content h1 {
+
+}
+
+.content input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+/**************************************************************/
