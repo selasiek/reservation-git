@@ -51,7 +51,7 @@ class ReservationsController extends Controller
     public function store(Request $request)
     {
         //store customer details
-        $date = Carbon::now(); //get the current date
+        //$date = Carbon::now(); //get the current date
         $reservation = new Reservation;
         $reservation->operator_id = $request->input('operator_id');
         $reservation->full_name = $request->input('full_name');
@@ -66,7 +66,7 @@ class ReservationsController extends Controller
         $reservation->departure = $request->input('departure');
         $reservation->ticket_count = $request->input('ticket_count');
         $reservation->total_amount = $request->input('total_amount');
-        $reservation->date = $date->toDateString();
+        $reservation->date = $request->input('date');
         $reservation->seat_number = 0;
         $reservation->ticket_number = 0;
         $reservation->cancel_flag = 0;
@@ -74,25 +74,50 @@ class ReservationsController extends Controller
         //$reservation->transaction_id = $request->input('transaction_id');
         $first = explode(' ',$request->input('full_name'))[0];
 
-        $message = 'Dear '. $first
-        .",\nYour reservation details are below;"
-        ."\nBus company: ". strtoupper($request->input('operator'))
-        ."\nNo of tickets: ".$request->input('ticket_count')
+        $test = 'Dear '. $first
+        .",\nYour reservation details;"
+        ."\nOperator: ". strtoupper($request->input('operator'))
+        ."\nTickets: ".$request->input('ticket_count')
         ."\nFrom: ".$request->input('from')
         ."\nTo: ".$request->input('to')
-        ."\nDeparture time: ".$request->input('departure')
-        ."\nAmount: GHC ".$request->input('total_amount')
-        ."\nKindly pay GHC ".$request->input('total_amount')." to MTN Mobile Money number 0550635126 (Abdulai Antigba) to confirm your reservation.
+        ."\nDeparture: ".$request->input('departure')
+        ."\nAmt: GHC ".$request->input('total_amount')
+        ."\nKindly pay GHC ".$request->input('total_amount')." to MTN Mobile Money number 0550635126 (Abdulai Antigba) to complete your reservation.
           \nThank you for using ticketafriq.com";
+        // $message = "Dear ". $first
+        // .", Your reservation details;"
+        // ." Operator: ". strtoupper($request->input('operator'))
+        // ." Tickets: ".$request->input('ticket_count')
+        // ." From: ".$request->input('from')
+        // ." To: ".$request->input('to')
+        // ." Departure: ".$request->input('departure')
+        // ." Amt: GHC ".$request->input('total_amount')
+        // ." Kindly pay GHC ".$request->input('total_amount')." to MTN Mobile Money number 0550635126 (Abdulai Antigba) to complete your reservation.
+        //    Thank you for using ticketafriq.com";
+        //
+        // // echo strlen($message);
+        //  $test = "Dear ";
+        // ." Operator: ". strtoupper($request->input('operator'))
+        // ." Tickets: ".$request->input('ticket_count')
+        // ." From: ".$request->input('from')
+        // ." To: ".$request->input('to')
+        // ." Departure: ".$request->input('departure')
+        // ." Amt: GHC ".$request->input('total_amount')
+        // ." Kindly pay GHC ".$request->input('total_amount')
+        //." to MTN Mobile Money number 0550635126 (Abdulai Antigba) to complete your reservation.";
+        //Thank you for using ticketafriq.com;S
 
-        // echo $message;
-        // echo strlen($message);
 
-        $sms = new Alert;
-        $phone = $sms->formatNumber($request->input('contact')); //format phone number from input. Prepend with 233
-        $sms->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$message,$phone,"0","1");
-        $sms->Submit();
-        //return 'Message sent to '. $phone;
+        //echo $test;
+        //$sms = new Alert;
+        $obj = new Alert;
+        $phone = $obj->formatNumber($request->input('contact'));
+        $obj->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$test,$phone,"0","1");
+        $obj->Submit();
+        // $phone = $sms->formatNumber($request->input('contact')); //format phone number from input. Prepend with 233
+        // $sms->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$message,$phone,"0","1");
+        // $sms->Submit();
+        //echo 'Message sent to '. $phone . $message;
     }
 
     public function summary()

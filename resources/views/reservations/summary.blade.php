@@ -124,7 +124,7 @@
                                       Thank you for using our service. Have a safe trip.
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                                       <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                     </div>
                                     </div>
@@ -139,5 +139,5 @@
                   </div>
                 </div>
               </div>
-<iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+<!-- <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe> -->
 @endsection
