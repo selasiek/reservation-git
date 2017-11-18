@@ -74,6 +74,13 @@
                       </div>
 
                       <div class="form-group">
+                          <label for="fare" class="col-md-4 control-label">No of seats: </label>
+                          <div class="col-md-6">
+                              <input id="fare" type="number" min="1" step="1" class="form-control" name="seat_count" value="{{$schedule->seat_count}}">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
                           <label for="reporting" class="col-md-4 control-label">Reporting: </label>
                           <div class="col-md-6">
                               <input id="reporting" type="time" class="form-control" name="reporting" value="{{$schedule->reporting}}">

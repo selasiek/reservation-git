@@ -19,6 +19,8 @@ class CreateSchedulesTable extends Migration
             $table->string('from');
             $table->string('to');
             $table->date('date');
+            $table->date('seat_count');
+            $table->date('seats_sold');
             $table->string('fare');
             $table->string('reporting');
             $table->string('departure');

@@ -17,6 +17,8 @@
                           <th>To</th>
                           <th>Date</th>
                           <th>Fare</th>
+                          <th>Seats Sold</th>
+                          <th>Seats Available</th>
                           <th>Reporting</th>
                           <th>Departure</th>
                           <th>Action</th>
@@ -30,11 +32,13 @@
                              <td>{{$schedule->from}}</td>
                              <td>{{$schedule->to}}</td>
                              <td>{{\Carbon\Carbon::createFromTimeStamp(strtotime($schedule->date))->toFormattedDateString()}}</td>
-                             <td>{{$schedule->fare}}</td>
+                             <td>GHC {{$schedule->fare}}.00</td>
+                             <td>{{$schedule->seats_sold}}</td>
+                             <td>{{$schedule->seat_count}}</td>
                              <td>{{$schedule->reporting}}</td>
                              <td>{{$schedule->departure}}</td>
                              <td> <a href="{{url('/schedules/destroy/'. $schedule->id)}}">Remove<a> | <a href="{{url('/schedules/'. $schedule->id . '/edit')}}">Edit<a></td>
-                             <td><button class="btn btn-small btn-default"><a href="#">Details<a/></button></td>
+                             <!-- <td><button class="btn btn-small btn-default"><a href="#">Details<a/></button></td> -->
                           </tr>
                       @endforeach
                       <tbody>

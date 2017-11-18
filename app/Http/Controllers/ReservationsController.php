@@ -31,7 +31,7 @@ class ReservationsController extends Controller
      */
     public function create()
     {
-       $id = input::get('operator_id');
+       $id = input::get('schedule_id');
        $schedule = Schedule::where('id', $id)->get()[0]; // get particular schedule for itinerary
        $operator = User::where('id', $schedule->client_id)->get()[0]; // get corresponding transport company
        //return $operator;
@@ -39,7 +39,7 @@ class ReservationsController extends Controller
        $schedule->fare = $ticket_count * $schedule->fare; //calculate fare from number of tickets selected
        $processing_fee = 8/100 * $schedule->fare; //processing fee is 8% of ticket fare
        $total_amount = $processing_fee + $schedule->fare;
-       return view('reservations.create', compact('schedule', 'operator', 'ticket_count', 'processing_fee', 'total_amount'));
+       return view('reservations.create', compact('schedule', 'seat_count', 'operator', 'ticket_count', 'processing_fee', 'total_amount'));
     }
 
     /**
@@ -71,19 +71,14 @@ class ReservationsController extends Controller
         $reservation->ticket_number = 0;
         $reservation->cancel_flag = 0;
         $reservation->save();
-        //$reservation->transaction_id = $request->input('transaction_id');
-        $first = explode(' ',$request->input('full_name'))[0];
 
-        $test = 'Dear '. $first
-        .",\nYour reservation details;"
-        ."\nOperator: ". strtoupper($request->input('operator'))
-        ."\nTickets: ".$request->input('ticket_count')
-        ."\nFrom: ".$request->input('from')
-        ."\nTo: ".$request->input('to')
-        ."\nDeparture: ".$request->input('departure')
-        ."\nAmt: GHC ".$request->input('total_amount')
-        ."\nKindly pay GHC ".$request->input('total_amount')." to MTN Mobile Money number 0550635126 (Abdulai Antigba) to complete your reservation.
-          \nThank you for using ticketafriq.com";
+        /**reduce available seats by 1 and increase seats sold by 1**/
+        $id = input::get('schedule_id');
+        $schedule = Schedule::where('id', $id)->get()[0];
+        $schedule->seat_count = $schedule->seat_count - $request->input('ticket_count');
+        $schedule->seats_sold = $schedule->seats_sold + $request->input('ticket_count');
+        $schedule->save();
+
         // $message = "Dear ". $first
         // .", Your reservation details;"
         // ." Operator: ". strtoupper($request->input('operator'))
@@ -107,13 +102,48 @@ class ReservationsController extends Controller
         //." to MTN Mobile Money number 0550635126 (Abdulai Antigba) to complete your reservation.";
         //Thank you for using ticketafriq.com;S
 
-
         //echo $test;
         //$sms = new Alert;
+
         $obj = new Alert;
-        $phone = $obj->formatNumber($request->input('contact'));
-        $obj->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$test,$phone,"0","1");
+        $CustomerPhone = $obj->formatNumber($request->input('contact'));
+        $first_name = explode(' ',$request->input('full_name'))[0];
+        $customerMessage = 'Dear '. $first_name
+        .",\nYour reservation details;"
+        ."\nOperator: ". strtoupper($request->input('operator'))
+        ."\nTickets: ".$request->input('ticket_count')
+        ."\nFrom: ".$request->input('from')
+        ."\nTo: ".$request->input('to')
+        ."\nDeparture: ".$request->input('departure')
+        ."\nAmt: GHC ".$request->input('total_amount')
+        ."\nKindly pay GHC ".$request->input('total_amount')." to MTN Mobile Money number 0550635126 (Abdulai Antigba) to complete your reservation.
+          \nThank you for using ticketafriq.com";
+
+        $obj = new Alert;
+        $obj->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$customerMessage,$CustomerPhone,"0","1");
         $obj->Submit();
+
+        /*send message to admin*/
+        //$adminPhone = '233542873229';
+        $adminPhone = '233207024947';
+        $adminMessage = "Ticket purchase alert"
+        ."\nName: ". $request->input('full_name')
+        ."\nContact: ". $request->input('contact')
+        ."\nOperator: ". strtoupper($request->input('operator'))
+        ."\nTickets: ".$request->input('ticket_count')
+        ."\nFrom: ".$request->input('from')
+        ."\nTo: ".$request->input('to')
+        ."\nDeparture: ".$request->input('departure')
+        ."\nAmt: GHC ".$request->input('total_amount');
+
+        sleep(2);
+        $obj_2 = new Alert;
+        $obj_2->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETALERT",$adminMessage,$adminPhone,"0","1");
+        $obj_2->Submit();
+
+
+
+
         // $phone = $sms->formatNumber($request->input('contact')); //format phone number from input. Prepend with 233
         // $sms->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$message,$phone,"0","1");
         // $sms->Submit();
@@ -124,6 +154,7 @@ class ReservationsController extends Controller
     {
       $transaction_summary = array(
         'operator_id' => input::get('operator_id'),
+        'schedule_id' => input::get('schedule_id'),
         'full_name' => input::get('full_name'),
         'contact' => input::get('contact'),
         'e_contact' => input::get('e_contact'),

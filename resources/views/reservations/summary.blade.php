@@ -15,6 +15,7 @@
                     {{ csrf_field() }}
                     {{ method_field('POST') }}
                       <input type="hidden" name="operator_id" value="{{$transaction_summary["operator_id"]}}">
+                      <input type="hidden" name="schedule_id" value="{{$transaction_summary["schedule_id"]}}">
                       <input type="hidden" name="full_name" value="{{$transaction_summary["full_name"]}}">
                       <input type="hidden" name="contact" value="{{$transaction_summary["contact"]}}">
                       <input type="hidden" name="e_contact" value="{{$transaction_summary["e_contact"]}}">

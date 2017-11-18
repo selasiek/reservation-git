@@ -20,6 +20,7 @@
                     {{ csrf_field() }}
                     {{ method_field('POST') }}
                       <input type="hidden" name="operator_id" value="{{$operator->id}}">
+                      <input type="hidden" name="schedule_id" value="{{$schedule->id}}">
                       <input type="hidden" name="operator" value="{{$operator->company_name}}">
                       <input type="hidden" name="bus_type" value="{{$schedule->bus_type}}">
                       <input type="hidden" name="from" value="{{$schedule->from}}">

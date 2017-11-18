@@ -82,6 +82,7 @@
                         <th>Bus Operator</th>
                         <th>Bus Type</th>
                         <th>Fare</th>
+                        <th>Seats Available</th>
                         <th>Reporting</th>
                         <th>Departure</th>
                         <th>Tickets</th>
@@ -90,10 +91,14 @@
                     </thead>
                     <tbody>
                     @foreach ($schedules as $schedule)
+
+
+                    @if ($schedule->seat_count != 0)
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/reservations/create/') }}">
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
-                        <input type="hidden" name="operator_id" value="{{$schedule->id}}">
+                        <input type="hidden" name="schedule_id" value="{{$schedule->id}}">
+                        <input type="hidden" name="ticket_count" value="{{$schedule->seat_count}}">
                         <tr>
                           <td>{{\Carbon\Carbon::createFromTimeStamp(strtotime($schedule->date))->toFormattedDateString()}}</td>
                           <td>{{$schedule->from}}</td>
@@ -101,16 +106,44 @@
                           <td>{{$schedule->company_name}}</td>
                           <td>{{$schedule->bus_type}}</td>
                           <td>GHC {{$schedule->fare}}.00</td>
+                          <td>{{$schedule->seat_count}}</td>
                           <!-- <input type="hidden" name="fare" value="{{$schedule->fare}}"> -->
                           <td>{{$schedule->reporting}}</td>
                           <td>{{$schedule->departure}}</td>
-                          <td><input type="number" style="width:40px;" value="1" min="1" step="1" name="ticket_count"></td>
+                          <td><input type="number" style="width:40px;" value="1" min="1" max="{{$schedule->seat_count}}" step="1" name="ticket_count"></td>
                           <!-- <td> <a href="{{ url('/reservations/create/'. $schedule->id) }}">Book<a></td> -  -->
                           <td><button type="submit" class="btn btn-warning btn-sm">
                               Book
                           </button></td>
                         </tr>
                      </form>
+
+                     @elseif ($schedule->seat_count == 0)
+                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/reservations/create/') }}">
+                         {{ csrf_field() }}
+                         {{ method_field('POST') }}
+                         <input type="hidden" name="schedule_id" value="{{$schedule->id}}">
+                         <input type="hidden" name="ticket_count" value="{{$schedule->seat_count}}">
+                         <tr>
+                           <td>{{\Carbon\Carbon::createFromTimeStamp(strtotime($schedule->date))->toFormattedDateString()}}</td>
+                           <td>{{$schedule->from}}</td>
+                           <td>{{$schedule->to}}</td>
+                           <td>{{$schedule->company_name}}</td>
+                           <td>{{$schedule->bus_type}}</td>
+                           <td>GHC {{$schedule->fare}}.00</td>
+                           <td><span style="color: #f90303;">SOLD OUT</span></td>
+                           <!-- <input type="hidden" name="fare" value="{{$schedule->fare}}"> -->
+                           <td>{{$schedule->reporting}}</td>
+                           <td>{{$schedule->departure}}</td>
+                           <td><input type="number" style="width:40px;" value="0" min="0" step="0" name="ticket_count" disabled></td>
+                           <!-- <td> <a href="{{ url('/reservations/create/'. $schedule->id) }}">Book<a></td> -  -->
+                           <td><button type="submit" class="btn btn-danger btn-sm" disabled>
+                               Book
+                           </button></td>
+                         </tr>
+                      </form>
+
+                     @endif
                     @endforeach
                     <tbody>
                   </table>

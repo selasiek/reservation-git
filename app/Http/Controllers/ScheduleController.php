@@ -50,6 +50,7 @@ class ScheduleController extends Controller
         $schedule->to = $request->input('to');
         $schedule->date = $request->input('date');
         $schedule->fare = $request->input('fare');
+        $schedule->seat_count = $request->input('seat_count');
         $schedule->reporting = $request->input('reporting');
         $schedule->departure = $request->input('departure');
         $schedule->save();
@@ -100,6 +101,7 @@ class ScheduleController extends Controller
         $schedule->to = $request->input('to');
         $schedule->date = $request->input('date');
         $schedule->fare = $request->input('fare');
+        $schedule->seat_count = $request->input('seat_count');
         $schedule->reporting = $request->input('reporting');
         $schedule->departure = $request->input('departure');
         $schedule->save();
