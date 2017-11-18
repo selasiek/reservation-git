@@ -40,7 +40,7 @@
 
               <div class="bootstrap-iso">
               <div class="input-group input-append date" id="datePicker">
-                <input class="form-control" id="date" name="date" placeholder="Date" required/>
+                <input class="form-control" id="date" name="date" placeholder="Date" type="date" required/>
                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
               </div>
               </div>
