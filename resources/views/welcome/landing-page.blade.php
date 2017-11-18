@@ -41,7 +41,7 @@
                      <div class="col-md-3 col-sm-3 col-xs-4">
                        <div class="bootstrap-iso">
                        <div class="input-group input-append date" id="datePicker">
-                         <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="type"/>
+                         <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date" required/>
                          <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                        </div>
                        </div>
