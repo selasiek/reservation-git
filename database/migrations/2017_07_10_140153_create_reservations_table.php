@@ -31,7 +31,6 @@ class CreateReservationsTable extends Migration
             $table->date('date');
             $table->string('cancel_flag');
             $table->string('transaction_id');
-            $table->string('operator_id');
             $table->timestamps();
         });
     }
