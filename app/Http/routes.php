@@ -24,6 +24,13 @@ Route::post('/reservations/store', 'ReservationsController@store');
 Route::post('/reservations/summary/', 'ReservationsController@summary');
 Route::resource('reservations', 'ReservationsController');
 
+// USSD Routes
+Route::get('/ussd', 'USSDController@index');
+
+
+
+
+
 Route::get('/foo', function () {
   $nexmo = app('Nexmo\Client');
 

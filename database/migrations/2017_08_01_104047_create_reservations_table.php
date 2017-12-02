@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReservationTable extends Migration
+class CreateReservationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -26,10 +26,11 @@ class CreateReservationTable extends Migration
             $table->string('to');
             $table->string('ticket_count');
             $table->string('total_amount');
+            $table->date('date');
             $table->string('seat_number');
             $table->string('ticket_number');
-            $table->date('date');
             $table->string('cancel_flag');
+            $table->string('invoice_number');
             $table->string('transaction_id');
             $table->timestamps();
         });

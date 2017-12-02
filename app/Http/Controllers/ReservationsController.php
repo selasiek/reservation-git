@@ -37,7 +37,7 @@ class ReservationsController extends Controller
        //return $operator;
        $ticket_count = input::get('ticket_count');
        $schedule->fare = $ticket_count * $schedule->fare; //calculate fare from number of tickets selected
-       $processing_fee = 8/100 * $schedule->fare; //processing fee is 8% of ticket fare
+       $processing_fee = 0.08 * $schedule->fare; //processing fee is 8% of ticket fare
        $total_amount = $processing_fee + $schedule->fare;
        return view('reservations.create', compact('schedule', 'seat_count', 'operator', 'ticket_count', 'processing_fee', 'total_amount'));
     }
@@ -57,7 +57,7 @@ class ReservationsController extends Controller
         $reservation->full_name = $request->input('full_name');
         $reservation->contact = $request->input('contact');
         $reservation->email = $request->input('email');
-        $reservation->operator = $request->input('operator');
+        //$reservation->operator = $request->input('operator');
         $reservation->e_contact = $request->input('e_contact');
         $reservation->from = $request->input('from');
         $reservation->to = $request->input('to');
@@ -70,6 +70,8 @@ class ReservationsController extends Controller
         $reservation->seat_number = 0;
         $reservation->ticket_number = 0;
         $reservation->cancel_flag = 0;
+        $reservation->invoice_number = 0;
+        $reservation->transaction_id = 0;
         $reservation->save();
 
         /**reduce available seats by 1 and increase seats sold by 1**/
@@ -139,7 +141,7 @@ class ReservationsController extends Controller
         sleep(2);
         $obj_2 = new Alert;
         $obj_2->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETALERT",$adminMessage,$adminPhone,"0","1");
-        $obj_2->Submit();
+        //$obj_2->Submit();
 
 
 

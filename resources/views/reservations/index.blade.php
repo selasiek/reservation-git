@@ -21,11 +21,10 @@
                           <th>To</th>
                           <th>Ticket Count</th>
                           <th>Amount</th>
-                          <th>Operator</th>
                           <th>Bus Type</th>
                           <th>Reporting</th>
                           <th>Departure</th>
-                          <th>Transaction Number</th>
+                          <th>Date Booked</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -41,12 +40,11 @@
                              <td>{{$reservation->to}}</td>
                              <td>{{$reservation->ticket_count}}</td>
                              <td>{{$reservation->total_amount}}</td>
-                             <td>{{$reservation->operator}}</td>
                              <td>{{$reservation->bus_type}}</td>
                              <td>{{$reservation->reporting}}</td>
                              <td>{{$reservation->departure}}</td>
-                             <td>{{$reservation->id}}</td>
-                             <td><button class="btn btn-small btn-default"><a href="#">Send Message<a/></button></td>
+                             <td>{{$reservation->created_at}}</td>
+                             <td><button class="btn btn-small btn-default"><a href="#">Details<a/></button></td>
                           </tr>
                       @endforeach
                       <tbody>
