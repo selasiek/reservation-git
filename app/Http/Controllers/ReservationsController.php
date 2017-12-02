@@ -141,7 +141,7 @@ class ReservationsController extends Controller
         sleep(2);
         $obj_2 = new Alert;
         $obj_2->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETALERT",$adminMessage,$adminPhone,"0","1");
-        //$obj_2->Submit();
+        $obj_2->Submit();
 
 
 
