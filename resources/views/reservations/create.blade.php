@@ -76,7 +76,7 @@
         <!-- Itinerary -->
         <div class="col-md-4 ">
               <div class="panel panel-default">
-                  <div class="panel-heading"><strong><font size="3">ITINERARY</font></strong></div>
+                  <div class="panel-heading"><strong><font size="2">ITINERARY</font></strong></div>
 
                   <div class="panel-body">
 

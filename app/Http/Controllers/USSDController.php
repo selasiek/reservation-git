@@ -10,6 +10,6 @@ class USSDController extends Controller
 {
     public function index()
     {
-      
+      return "USSD";
     }
 }
