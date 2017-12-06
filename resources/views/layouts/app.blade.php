@@ -88,7 +88,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/reservations/show/'. Auth::id()) }}"><i class="fa fa-btn"></i>All Reservations</a></li>
-                            <li><a href="{{ url('/reservations/create') }}"><i class="fa fa-btn"></i>New Reservation</a></li>
+                            <!-- <li><a href="{{ url('/reservations/create') }}"><i class="fa fa-btn"></i>New Reservation</a></li> -->
                         </ul>
 
                         <!-- Schedules -->
@@ -109,7 +109,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <!-- <li><a href="{{ url('/register') }}">Register</a></li> -->
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
