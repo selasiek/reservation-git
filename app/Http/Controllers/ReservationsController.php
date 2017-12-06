@@ -122,7 +122,9 @@ class ReservationsController extends Controller
           \nThank you for using ticketafriq.com";
 
         $obj = new Alert;
-        $obj->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$customerMessage,$CustomerPhone,"0","1");
+        //$obj->Sender("rslr.connectbind.com","8080","grn-dbridge","digitalb","TICKETAFRIQ",$customerMessage,$CustomerPhone,"0","1");
+        $obj->Sender("103.85.213.45","8080","grn-dbridge","digitalb","TICKETAFRIQ",$customerMessage,$CustomerPhone,"0","1");
+        //$obj->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETAFRIQ",$customerMessage,$CustomerPhone,"0","1");
         $obj->Submit();
 
         /*send message to admin*/
@@ -140,7 +142,8 @@ class ReservationsController extends Controller
 
         sleep(2);
         $obj_2 = new Alert;
-        $obj_2->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETALERT",$adminMessage,$adminPhone,"0","1");
+        //$obj_2->Sender("103.85.213.45","8080","grn-dbridge","digitalb","TICKETALERT",$adminMessage,$adminPhone,"0","1");
+        //$obj_2->Sender("121.241.242.114","8080","grn-dbridge","digitalb","TICKETALERT",$adminMessage,$adminPhone,"0","1");
         //$obj_2->Submit();
 
 
