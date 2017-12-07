@@ -265,16 +265,13 @@ It is mandatory for passengers to present valid ticket for identification at the
                                       Thank you for using our service. Have a safe trip.
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                                      <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = 'https:\\www.ticketafriq.com';">OK</button>
                                       <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                     </div>
                                     </div>
                                   </div>
                                 </div>
                             <!-- /Large modal -->
-
-
-
                             </div>
                           </div>
                         </form>
